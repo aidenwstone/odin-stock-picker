@@ -1,1 +1,2 @@
 # odin-stock-picker
+This is a simple program created as part of The Odin Project. I will use the Ruby basics I have learned so far to code a program which will take in an array of stock prices, one for each hypothetical day, and return a pair of days representing the best day to buy and the best day to sell.
