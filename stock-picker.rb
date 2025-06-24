@@ -1,11 +1,28 @@
 def stock_picker(stock_prices)
   # Take in an array of stock prices
   # Return a pair of days representing the best day to buy and the best day to sell
-  day_indexes = (0...stock_prices.length).to_a
-  stock_returns = day_indexes.combination(2).to_h do |day_pair| 
-    stock_return = stock_prices[day_pair.last] - stock_prices[day_pair.first]
-    [day_pair, stock_return]
+  return nil if stock_prices.length < 2
+  
+  min_price = stock_prices[0]
+  buy_day = 0
+  max_profit = stock_prices[1] - stock_prices[0]
+  best_days = [0, 1]
+
+  stock_prices.each_with_index do |current_price, current_day|
+    next if current_day == 0
+
+    potential_profit = current_price - min_price
+
+    if potential_profit > max_profit
+      max_profit = potential_profit
+      best_days = [buy_day, current_day]
+    end
+
+    if current_price < min_price
+      min_price = current_price 
+      buy_day = current_day
+    end
   end
 
-  stock_returns.max_by { |key, value| value }.first
+  best_days
 end
